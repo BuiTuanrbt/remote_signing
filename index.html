@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="static/css/style.css"> -->
+</head>
+<body>
+    <form action="services/sign/sign_pdf.php" method="post" enctype="multipart/form-data">
+        <input type="file" id="fileToUpload" name="fileToUpload" >
+
+        <label>Choose the CA:</label>
+        <select name="category">
+            <option value="CA01">CA01</option>
+            <option value="CA34">CA34</option>
+            <option value="CA28">CA28</option>
+            <option value="CA03">CA03</option>
+            <option value="CA10">CA10</option>
+        </select><br>
+        <input type="submit" value="Ký Số" name="submit">
+    </form>
+</body>
+</html>

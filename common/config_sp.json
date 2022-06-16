@@ -1,0 +1,34 @@
+{
+	"credentials_list":[
+		{
+			"sp_id": "test_sp",
+			"sp_password": "12345678",
+			"ca_id": "CA01",
+			"url": "http://127.0.0.1:1991"
+		},
+		{
+			"sp_id": "test_sp",
+			"sp_password": "12345678",
+			"ca_id": "CA34",
+			"url": "http://127.0.0.1:1991"
+		},
+		{
+			"sp_id": "test_sp",
+			"sp_password": "12345678",
+			"ca_id": "CA28",
+			"url": "http://127.0.0.1:1991"
+		},
+		{
+			"sp_id": "test_sp",
+			"sp_password": "12345678",
+			"ca_id": "CA10",
+			"url": "http://127.0.0.1:1991"
+		},
+		{
+			"sp_id": "test_sp",
+			"sp_password": "12345678",
+			"ca_id": "CA03",
+			"url": "http://127.0.0.1:1991"
+		}
+	]
+}
