@@ -38,9 +38,10 @@ if(isset($_POST["submit"])) {
                 $get_cert = new Get_cert();
                 $get_cert->setSpId($sp_obj->credentials_list[$i]->sp_id);
                 $get_cert->setSpPassword($sp_obj->credentials_list[$i]->sp_password);
-                $get_cert->setUserId("User_01");
-                $get_cert->setTransactionId("1as3f1ads");
-                $get_cert->setSerialNumber("4d274078f45b55336c74f48f8025e1047775e4e5");
+                $get_cert->setUserId("0101243150-996");
+                $rand_trans = "SP_CA_".random_int(10000,19999);
+                $get_cert->setTransactionId("SP_CA_".$rand_trans);
+                $get_cert->setSerialNumber("54010C24214B4106504997B6583AC921");
 
                 //tao json_getcert file
                 $json_path_file = $JSON_FOLDER_PATH.uniqid().".json";
@@ -62,61 +63,26 @@ if(isset($_POST["submit"])) {
                 $call_jar->setSignedPdfpath($signed_pdf_file);
                 $call_jar->setCaUrl($url);
 
+                $sta = $call_jar->runJar();
+                unlink($json_path_file);
+                foreach (glob($OUTPUT_PATH."*.pdf") as $file) {
+
                 
-                if ($call_jar->runJar()){
+                    if(time() - filectime($file) > 180){
+                        unlink($file);
+                        }
+                    }
+
+                if ($sta){
+                                       
+                    echo "<h1>Signed Succesfully </h1>
+                    <a href='".$signed_pdf_file."' download>Download</a>";
+                   
+                   
                     
-                    // header('Content-type: application/pdf');
-                    // header('Content-Disposition: attachment; filename="' . $signed_pdf_file . '"');
-                    // header('Content-Length: ' . filesize($signed_pdf_file));
-
-                    // readfile($signed_pdf_file);
-
-                    //test
-                    //Read the filename
-                    //$filename = $_GET['path'];
-                    //Check the file exists or not
-                    //if(file_exists($filename)) {
-
-                    //Define header information
-                    //header('Content-Description: File Transfer');
-                    header('Content-Type: application/pdf');
-                    //header("Cache-Control: no-cache");
-                    //header("Expires: 0");
-                    header('Content-Disposition: inline; filename="'.basename($signed_pdf_file).'"');
-                    //header('Content-Length: ' . filesize($signed_pdf_file));
-                    header('Pragma: public');
-
-                    //Clear system output buffer
-                    flush();
-
-                    //Read the size of the file
-                    readfile($signed_pdf_file);
-
-                    //Terminate from the script
-                    die();
-
-                    //end test
-
-
-                    exit;
-                 
-                    unlink($json_path_file);
-                    // unlink($signed_pdf_file);
-
                 }else{
 
-                    ob_start();
-                    $file = "C:\\xampp\\htdocs\\remote_sign\\output\\62a9a225bb365.pdf";
-                    header('Content-Description: File Transfer');
-                    header('Content-Type: application/pdf');
-                    header('Content-Disposition: attachment; filename="'.basename($file).'"');
-                    header('Expires: 0');
-                    header('Cache-Control: must-revalidate');
-                    header('Pragma: public');
-                    header('Content-Length: ' . filesize($file));
-                    ob_clean();
-                    flush();
-                    readfile($file);
+                    echo "<h1>Signed Fail </h1>";
                 }
 
 
@@ -125,7 +91,6 @@ if(isset($_POST["submit"])) {
     
         }
         else{
-
         }
     }
 }else{

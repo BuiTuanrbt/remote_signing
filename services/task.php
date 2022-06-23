@@ -32,7 +32,7 @@ class Call_Jar{
     function runJar(){
         try{
             $command = "java -jar ".$this->jar_path." ".$this->json_path." ".$this->original_pdf_path." ".$this->signed_pdf_path." ".$this->ca_url;
-            echo $command;
+            // echo $command;
             exec($command);
             return true;
         }catch(Exception $e){
